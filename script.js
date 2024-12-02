@@ -43,10 +43,14 @@ function addToCart(productId) {
   const cart = JSON.parse(sessionStorage.getItem("cart")) || [];
 
   // Check if the product is already in the cart
-  const existingProduct = cart.find((item) => item.id === product.id);
-  if (!existingProduct) {
-    // Add the product to the cart
+  const existingProductIndex = cart.findIndex((item) => item.id === product.id);
+  
+  if (existingProductIndex === -1) {
+    // Add the product to the cart if not already present
     cart.push({ id: product.id, name: product.name, price: product.price });
+  } else {
+    // Optionally, you could implement logic to increase quantity here
+    alert("Product is already in the cart.");
   }
 
   // Save updated cart to session storage
